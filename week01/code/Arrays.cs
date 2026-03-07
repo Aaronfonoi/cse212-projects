@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public static class Arrays
 {
     /// <summary>
@@ -6,14 +9,25 @@ public static class Arrays
     /// integer greater than 0.
     /// </summary>
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
-    public static double[] MultiplesOf(double number, int length)
+     
+    
+    /// Part 1: MultiplesOf Funtion using arrays
+    /// 
+    ///Plan:
+    /// 1. Create a new array of doubles with the size of 'count'.
+    /// 2. Use a for loop to iterate from 0 to 'count - 1'.
+    /// 3. Inside the loop, calculate the multiple by multiplying 'startingNumber' with (i + 1) and store it in the array.
+    /// 4. After the loop, return the array containing the multiples of 'startingNumber'.
+    public static double[] MultiplesOf(double startingNumber, int count)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        double[] result = new double[count];
 
-        return []; // replace this return statement with your own
+        for (int i = 0; i < count; i++)
+        {
+            result[i] = startingNumber * (i + 1);
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -23,8 +37,35 @@ public static class Arrays
     ///
     /// Because a list is dynamic, this function will modify the existing data list rather than returning a new list.
     /// </summary>
+    /// 
+    /// 
+    // Plan:
+    // 1. Check if the list is empty or if the amount is less than or equal to 0 or if the amount is equal to the count of the list. If any of these conditions are true, return without making any changes.
+    // 2. Create a new list called 'rightPart' that contains the last 'amount' elements of the original list.
+    // 3. Create another list called 'leftPart' that contains the remaining elements from the beginning of the original list.
+    // 4. Clear the original list to prepare for the rotated elements.
+    // 5. Add the elements from 'rightPart' to the original list, followed by the elements from 'leftPart'.
     public static void RotateListRight(List<int> data, int amount)
     {
+        int count = data.Count;
+
+        if (count <= 1 || amount <= 0 || amount == count)
+            return;
+
+        // Get the last 'amount' elements
+        List<int> rightPart = data.GetRange(count - amount, amount);
+
+        // Get the remaining elements from the beginning
+        List<int> leftPart = data.GetRange(0, count - amount);
+
+        // Clear the original list
+        data.Clear();
+
+        // Add the rotated parts
+        data.AddRange(rightPart);
+        data.AddRange(leftPart);        
+        
+        
         // TODO Problem 2 Start
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
