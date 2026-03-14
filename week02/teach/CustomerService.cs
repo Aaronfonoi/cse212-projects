@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using System.ComponentModel;
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
@@ -14,6 +16,9 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 1");
+        var service = new CustomerService(4);
+        service.AddNewCustomer();
+        service.ServeCustomer();
 
         // Defect(s) Found: 
 
@@ -23,12 +28,43 @@ public class CustomerService {
         // Scenario: 
         // Expected Result: 
         Console.WriteLine("Test 2");
+        service = new CustomerService(4);
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        Console.WriteLine($"Pre Serving customers: {service}");
+        service.ServeCustomer();
+        service.ServeCustomer();
+        Console.WriteLine($"Post serving customer: {service}");
 
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
+
+        Console.WriteLine("test 3");
+        service = new CustomerService(4);
+        service.ServeCustomer();
+
+        Console.WriteLine("=================");
+
+        Console.WriteLine("test 4");
+        service = new CustomerService(4);
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        service.AddNewCustomer();
+        Console.WriteLine($"Service Queue: {service}");
+
+
+        Console.WriteLine("=================");
+
+
+        Console.WriteLine("Test 5");
+        service = new CustomerService(0);
+        Console.WriteLine($"Size should be 10: {service}");
+
     }
 
     private readonly List<Customer> _queue = new();
@@ -88,9 +124,17 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count <= 0) 
+        {
+            Console.WriteLine("No Customers in the queue");
+        }
+        else {
+            
+            var customer = _queue[0];
+            _queue.RemoveAt(0); 
+            Console.WriteLine(customer);
+            
+        }
     }
 
     /// <summary>

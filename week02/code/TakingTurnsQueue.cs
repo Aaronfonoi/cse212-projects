@@ -46,6 +46,14 @@ public class TakingTurnsQueue
                 _people.Enqueue(person);
             }
 
+            //------issue found----------
+            // solution: missing code to handle when a person is out of turns so they are not removed when they are out
+
+            if (person.Turns <= 0)
+            {
+                _people.Enqueue(person);
+            }
+
             return person;
         }
     }
